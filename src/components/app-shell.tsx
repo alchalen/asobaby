@@ -11,6 +11,7 @@ import {
   Search,
   Bell,
   LogOut,
+  UserCog,
 } from "lucide-react";
 import { createClient } from "../lib/supabase/client";
 
@@ -23,6 +24,7 @@ const menu = [
   { name: "Pacientes", href: "/pacientes", icon: Users },
   { name: "Calendario", href: "/calendario", icon: CalendarDays },
   { name: "Reportes", href: "/reportes", icon: BarChart3 },
+  { name: "Usuarios", href: "/usuarios", icon: UserCog },
   { name: "Configuración", href: "/configuracion", icon: Settings },
 ];
 

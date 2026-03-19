@@ -69,7 +69,7 @@ export default function LoginPage() {
                                     value={form.email}
                                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                                     className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm outline-none transition focus:border-pink-300 focus:bg-white"
-                                    placeholder="admin@asobaby.com"
+                                    placeholder="Correo"
                                 />
                             </div>
                         </div>
