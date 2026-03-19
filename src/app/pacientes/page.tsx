@@ -241,7 +241,7 @@ export default function PacientesPage() {
     doc.text(`Fecha: ${new Date().toLocaleDateString('es-EC')}`, 140, 32);
 
     // Preparar datos para la tabla
-    const tablaData = [];
+    const tablaData: string[][] = [];
 
     // Agregar servicios (cargos)
     servicios.forEach(s => {
