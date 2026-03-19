@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Plus, Search, Shield, Trash2 } from "lucide-react";
-import { createClient } from "../../lib/supabase/client";
-import NuevoUsuarioModal from "../../components/nuevo-usuario-modal";
+import { createClient } from "../lib/supabase/client";
+import NuevoUsuarioModal from "./nuevo-usuario-modal";
 
 type Usuario = {
     id: string;
