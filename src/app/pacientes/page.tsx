@@ -156,8 +156,8 @@ export default function PacientesPage() {
 
     setServicios((serviciosRes.data || []) as Servicio[]);
     setDetalles((detallesRes.data || []) as Detalle[]);
-    setCitas((citasRes.data || []) as Cita[]);
-    setPagos((pagosRes.data || []) as Pago[]);
+    setCitas((citasRes.data || []) as as unknown Cita[]);
+    setPagos((pagosRes.data || []) as as unknown Pago[]);
   };
 
   useEffect(() => {
