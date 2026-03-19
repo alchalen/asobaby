@@ -59,7 +59,7 @@ type Cita = {
   observaciones: string | null;
   catalogo_servicios: {
     nombre: string;
-  } | null;
+  }[] | null;
 };
 
 type Pago = {
@@ -69,7 +69,7 @@ type Pago = {
   observacion: string | null;
   metodos_pago: {
     nombre: string;
-  } | null;
+  }[] | null;
 };
 
 const tabs = ["General", "Servicios", "Detalles", "Citas"];
@@ -156,8 +156,8 @@ export default function PacientesPage() {
 
     setServicios((serviciosRes.data || []) as Servicio[]);
     setDetalles((detallesRes.data || []) as Detalle[]);
-    setCitas((citasRes.data || []) as unknown as Cita[]);
-    setPagos((pagosRes.data || []) as unknown as Pago[]);
+    setCitas((citasRes.data || []) as Cita[]);
+    setPagos((pagosRes.data || []) as Pago[]);
   };
 
   useEffect(() => {
