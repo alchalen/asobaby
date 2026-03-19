@@ -1,17 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Asobaby Frontend
 
-## Getting Started
+Aplicación web para la gestión de Asobaby, desarrollada con Next.js 15, Tailwind CSS y Supabase.
 
-First, run the development server:
+## Configuración Inicial
+
+1. **Instalar dependencias:**
+
+```bash
+npm install
+```
+
+2. **Configurar Variables de Entorno:**
+   
+   Renombra el archivo de ejemplo o crea uno nuevo llamado `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Luego, edita `.env.local` y agrega tus credenciales de Supabase.
+
+3. **Ejecutar el servidor de desarrollo:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

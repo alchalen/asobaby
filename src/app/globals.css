@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f8fb;
+  --foreground: #0f172a;
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font: inherit;
+}
+.fc {
+  --fc-border-color: #e2e8f0;
+  --fc-page-bg-color: #ffffff;
+  --fc-neutral-bg-color: #f8fafc;
+  --fc-list-event-hover-bg-color: #fdf2f8;
+  --fc-today-bg-color: rgba(236, 72, 153, 0.08);
+  --fc-event-border-color: transparent;
+  --fc-button-text-color: #475569;
+  --fc-button-bg-color: #f1f5f9;
+  --fc-button-border-color: #e2e8f0;
+  --fc-button-hover-bg-color: #e2e8f0;
+  --fc-button-hover-border-color: #cbd5e1;
+  --fc-button-active-bg-color: #db2777;
+  --fc-button-active-border-color: #db2777;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.fc .fc-button {
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  padding: 0.5rem 0.85rem !important;
+}
+
+.fc .fc-daygrid-day,
+.fc .fc-timegrid-slot,
+.fc .fc-timegrid-col {
+  background: #fff;
+}
+
+.fc .fc-daygrid-day-frame {
+  min-height: 110px;
+}
+
+.fc .fc-event {
+  border-radius: 12px !important;
+  padding: 2px 6px !important;
+  font-size: 0.78rem !important;
+}
+
+.fc .fc-scrollgrid,
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: #e2e8f0 !important;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: #334155;
+  text-decoration: none !important;
+}
+
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-timegrid-slot-label-cushion {
+  color: #64748b;
+}
+
+.fc .fc-highlight {
+  background: rgba(236, 72, 153, 0.12) !important;
+}
