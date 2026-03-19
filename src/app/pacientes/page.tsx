@@ -156,8 +156,8 @@ export default function PacientesPage() {
 
     setServicios((serviciosRes.data || []) as Servicio[]);
     setDetalles((detallesRes.data || []) as Detalle[]);
-    setCitas((citasRes.data || []) as Cita[]);
-    setPagos((pagosRes.data || []) as Pago[]);
+    setCitas((citasRes.data || []) as unknown as Cita[]);
+    setPagos((pagosRes.data || []) as unknown as Pago[]);
   };
 
   useEffect(() => {
@@ -257,7 +257,7 @@ export default function PacientesPage() {
     pagos.forEach(p => {
       tablaData.push([
         new Date(p.fecha_pago).toLocaleString('es-EC', { dateStyle: 'short', timeStyle: 'short' }),
-        `Abono (${p.metodos_pago?.nombre || 'N/A'})`,
+        `Abono (${p.metodos_pago?.map((m) => m.nombre).join(", ") || 'N/A'})`,
         '',
         `$${Number(p.monto).toFixed(2)}`
       ]);
@@ -664,7 +664,7 @@ export default function PacientesPage() {
                         citas.map((item) => (
                           <div key={item.id} className="rounded-2xl bg-slate-50 p-4">
                             <p className="font-medium">
-                              {item.fecha} • {item.hora_inicio} • {item.catalogo_servicios?.nombre || "Cita"}
+                              {item.fecha} • {item.hora_inicio} • {item.catalogo_servicios?.map((s) => s.nombre).join(", ") || "Cita"}
                               {item.hora_fin ? ` - ${item.hora_fin}` : ""}
                             </p>
                             <p className="text-sm text-slate-500">
