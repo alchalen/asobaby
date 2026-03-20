@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -12,6 +13,8 @@ import {
   Bell,
   LogOut,
   UserCog,
+  Menu,
+  X,
 } from "lucide-react";
 import { createClient } from "../lib/supabase/client";
 
@@ -32,6 +35,12 @@ export default function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Cerrar el menú móvil al navegar a otra página
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -46,6 +55,63 @@ export default function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-screen bg-[#f8f8fb] text-slate-800">
       <div className="flex min-h-screen">
+        {/* Mobile Sidebar Overlay */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-50 flex lg:hidden">
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"
+              onClick={() => setSidebarOpen(false)}
+            />
+
+            {/* Sidebar Panel */}
+            <div className="relative flex w-full max-w-xs flex-1 flex-col bg-white pt-5 shadow-xl">
+              <div className="flex items-center justify-between px-6 pb-2">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-pink-100 text-lg font-bold text-pink-600">
+                    A
+                  </div>
+                  <span className="text-lg font-semibold tracking-tight">AsoBaby</span>
+                </div>
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              <nav className="flex-1 space-y-2 overflow-y-auto px-4 py-4">
+                {menu.map((item) => {
+                  const Icon = item.icon;
+                  const active = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${active
+                          ? "bg-pink-50 text-pink-600"
+                          : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                        }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+                <button
+                  onClick={handleLogout}
+                  className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-red-50 hover:text-red-600"
+                >
+                  <LogOut className="h-5 w-5" />
+                  <span>Cerrar sesión</span>
+                </button>
+              </nav>
+            </div>
+          </div>
+        )}
+
+        {/* Desktop Sidebar */}
         <aside className="hidden w-72 border-r border-slate-200 bg-white lg:flex lg:flex-col">
           <div className="flex items-center gap-3 border-b border-slate-100 px-6 py-5">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-pink-100 text-pink-600 text-xl font-bold">
@@ -100,9 +166,12 @@ export default function AppShell({ children }: AppShellProps) {
           <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
             <div className="flex items-center justify-between gap-4 px-4 py-4 lg:px-8">
               <div className="flex flex-1 items-center gap-4">
-                <div className="lg:hidden flex h-11 w-11 items-center justify-center rounded-2xl bg-pink-100 text-pink-600 font-bold">
-                  A
-                </div>
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 lg:hidden"
+                >
+                  <Menu className="h-5 w-5" />
+                </button>
 
                 <div className="relative w-full max-w-xl">
                   <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />

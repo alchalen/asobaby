@@ -11,6 +11,7 @@ import {
   Download,
   ChevronDown,
   ChevronUp,
+  Hash,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -26,6 +27,7 @@ type Paciente = {
   nombres: string;
   apellidos: string | null;
   cedula: string | null;
+  historia_clinica: string | null;
   celular: string | null;
   fecha_nacimiento: string | null;
   direccion: string | null;
@@ -181,7 +183,7 @@ export default function PacientesPage() {
     if (!value) return pacientes;
 
     return pacientes.filter((p) =>
-      `${p.nombres ?? ""} ${p.apellidos ?? ""} ${p.celular ?? ""} ${p.cedula ?? ""}`
+      `${p.nombres ?? ""} ${p.apellidos ?? ""} ${p.celular ?? ""} ${p.cedula ?? ""} ${p.historia_clinica ?? ""}`
         .toLowerCase()
         .includes(value)
     );
@@ -346,7 +348,7 @@ export default function PacientesPage() {
                 <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 <input
                   type="text"
-                  placeholder="Buscar paciente..."
+                  placeholder="Buscar por nombre, cédula o HC..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm outline-none focus:border-pink-300 focus:bg-white"
@@ -377,6 +379,11 @@ export default function PacientesPage() {
                           <div>
                             <p className="font-semibold text-slate-900">
                               {p.nombres} {p.apellidos ?? ""}
+                              {p.historia_clinica && (
+                                <span className="ml-2 inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                                  {p.historia_clinica}
+                                </span>
+                              )}
                             </p>
                             <p className="mt-1 text-sm text-slate-500">
                               {p.celular || "Sin celular"}
@@ -413,6 +420,9 @@ export default function PacientesPage() {
                       </h3>
                       <p className="mt-1 text-sm text-slate-500">
                         Cédula: {pacienteSeleccionado.cedula || "No registrada"}
+                        {pacienteSeleccionado.historia_clinica && (
+                          <span className="ml-2 font-medium text-slate-700">| HC: {pacienteSeleccionado.historia_clinica}</span>
+                        )}
                       </p>
                     </div>
 
@@ -439,6 +449,11 @@ export default function PacientesPage() {
                       <h4 className="text-lg font-semibold">Información general</h4>
 
                       <div className="mt-5 space-y-4 text-sm">
+                        <div className="flex items-center gap-3">
+                          <Hash className="h-4 w-4 text-pink-500" />
+                          <span>Historia Clínica: {pacienteSeleccionado.historia_clinica || "No registrada"}</span>
+                        </div>
+
                         <div className="flex items-center gap-3">
                           <Phone className="h-4 w-4 text-pink-500" />
                           <span>{pacienteSeleccionado.celular || "Sin celular"}</span>
