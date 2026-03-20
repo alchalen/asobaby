@@ -219,8 +219,8 @@ export default function ReportesPage() {
                 const p = pacientes.find(px => px.id === id);
                 return {
                     id,
-                    nombre: p ? `${p.nombres} ${p.apellidos || ''}` : "Desconocido",
                     ...data,
+                    nombre: p ? `${p.nombres} ${p.apellidos || ''}` : "Desconocido",
                     saldo: data.cargos - data.abonos
                 };
             })
