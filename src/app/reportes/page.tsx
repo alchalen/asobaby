@@ -271,7 +271,7 @@ export default function ReportesPage() {
         doc.text(`Ingresos: $${kpi.ingresos.toFixed(2)}`, 14, 50);
         doc.text(`Pacientes Nuevos: ${kpi.nuevosPacientes}`, 14, 60);
 
-        doc.save(`reporte_${activeTab}.pdf`);
+        doc.save(`reporte_general_${fechaInicio}_al_${fechaFin}.pdf`);
     };
 
     if (loading) return <div className="p-8 text-center text-slate-500">Generando reportes...</div>;
